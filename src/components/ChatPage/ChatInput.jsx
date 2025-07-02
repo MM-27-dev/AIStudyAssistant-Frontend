@@ -13,30 +13,30 @@ export default function ChatInput() {
   };
 
   return (
-    <div className="border-t border-gray-700 p-6">
+    <div className="border-t border-[#33334A] py-6 px-4 sm:px-6 lg:px-8">
       <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
-        <div className="relative bg-gray-800 rounded-xl border border-gray-700 focus-within:border-gray-600 transition-colors">
+        <div className="relative bg-[#1B1B2B] rounded-xl border border-[#33334A] focus-within:border-[#33334A] transition-colors">
           <input
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Enter a prompt here"
-            className="w-full bg-transparent px-4 py-4 pr-24 text-gray-300 placeholder-gray-500 focus:outline-none"
+            className="w-full bg-transparent pl-5 pr-32 py-3 text-[#CCCCCC] placeholder-[#888899] focus:outline-none text-sm sm:text-base font-poppins"
           />
 
-          <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
+          <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
             <button
               type="button"
               className="p-2 rounded-lg hover:bg-gray-700 transition-colors"
             >
-              <Paperclip className="w-5 h-5 text-gray-400" />
+              <Paperclip className="w-5 h-5 text-[#888899]" />
             </button>
 
             <button
               type="button"
               className="p-2 rounded-lg hover:bg-gray-700 transition-colors"
             >
-              <Mic className="w-5 h-5 text-gray-400" />
+              <Mic className="w-5 h-5 text-[#888899]" />
             </button>
 
             <button
@@ -49,7 +49,7 @@ export default function ChatInput() {
           </div>
         </div>
 
-        <p className="text-center mt-4 text-xs text-gray-500">
+        <p className="text-center mt-4 text-xs text-[#888899] font-poppins">
           Free Research Preview. Bot Buzz may produce inaccurate information
           about people, places, or facts.{" "}
           <span className="text-blue-400 hover:text-blue-300 cursor-pointer">

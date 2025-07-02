@@ -6,7 +6,7 @@ import SuggestionCard from "./SuggestionCard";
 import ChatInput from "./ChatInput";
 
 function ChatUI() {
-  const [sidebarCollapsed, setSidebarCollapsed] = React.useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = React.useState(true); // Default to collapsed as per image_dbbe79.png
 
   const suggestions = [
     {
@@ -28,7 +28,7 @@ function ChatUI() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-900 flex">
+    <div className="min-h-screen bg-[#0E0E1B] flex text-base font-poppins">
       {/* Sidebar */}
       <Sidebar
         isCollapsed={sidebarCollapsed}
@@ -36,7 +36,7 @@ function ChatUI() {
       />
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Bar */}
         <TopBar
           isCollapsed={sidebarCollapsed}
@@ -46,21 +46,21 @@ function ChatUI() {
         {/* Main Chat Area */}
         <div className="flex-1 flex flex-col">
           {/* Center Content */}
-          <div className="flex-1 flex flex-col items-center justify-center p-8">
+          <div className="flex-1 flex flex-col items-center justify-center p-4 sm:p-8">
             {/* AI Assistant Icon */}
-            <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center mb-8">
-              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-                <div className="w-4 h-4 bg-gradient-to-r from-purple-500 to-blue-500 rounded-sm"></div>
-              </div>
-            </div>
+              <img
+                src="/bot-icon.png"
+                alt="AI Assistant"
+                className="w-10 h-10 sm:w-12 sm:h-12"
+              />
+            
 
             {/* Title */}
-            <h1 className="text-2xl font-semibold text-white mb-12">
+            <h1 className="text-xl sm:text-2xl font-medium text-white mb-10">
               Your Daily AI Assistant
             </h1>
-
             {/* Suggestion Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl w-full mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 w-full max-w-5xl px-4">
               {suggestions.map((suggestion, index) => (
                 <SuggestionCard
                   key={index}
@@ -73,7 +73,7 @@ function ChatUI() {
           </div>
 
           {/* Chat Input */}
-          <ChatInput/>
+          <ChatInput />
         </div>
       </div>
     </div>

@@ -5,47 +5,65 @@
 @theme {
   /* Typography Colors */
   --color-typography-main-white: #ffffff;
-  --color-typography-light-white: #f9f9fa;
-  --color-typography-black: #202020;
-  --color-typography-dark-grey: #2d2f33;
-  --color-typography-medium-grey: #62656a;
-  --color-typography-light-grey: #a3a3a4;
+  --color-typography-light-white: #f9f9fa; /* Not directly used in the dark theme, but kept */
+  --color-typography-black: #202020;       /* Not directly used in the dark theme, but kept */
+  --color-typography-dark-grey: #2d2f33;   /* Not directly used in the dark theme, but kept */
+  --color-typography-medium-grey: #62656a; /* Not directly used in the dark theme, but kept */
+  --color-typography-light-grey: #a3a3a4;  /* Not directly used in the dark theme, but kept */
+
+  /* NEW: Text Colors derived from Figma */
+  --color-text-primary: #CCCCCC; /* 'dark-text' */
+  --color-text-secondary: #888899; /* 'light-gray-text' */
 
   /* Icon Colors */
-  --color-icon-green: #b8d447;
-  --color-icon-peach: #f79e87;
-  --color-icon-light-cyan: #b7e6f4;
-  --color-icon-light-yellow: #fae96b;
-  --color-icon-light-blue: #9bb8d3;
-  --color-icon-purple: #837cff;
+  --color-icon-green: #6BD27F; /* Matches Figma suggestion card green */
+  --color-icon-peach: #FF6B6B; /* Matches Figma suggestion card red-ish */
+  --color-icon-light-cyan: #3B3BFF; /* Matches Figma suggestion card blue */
+  --color-icon-light-yellow: #FFD43B; /* Matches Figma suggestion card yellow */
+  --color-icon-light-blue: #9bb8d3; /* Not directly used for current icons, but kept */
+  --color-icon-purple: #837cff;    /* Not directly used for current icons, but kept */
   --color-icon-white: #ffffff;
   --color-icon-black: #202020;
 
   /* Input Fields */
-  --color-input-dark: #25252c;
-  --color-input-placeholder: #696e7c;
-  --color-input-label: #8a92a6;
+  --color-input-background: #1B1B2B; /* Matches 'dark-sidebar' */
+  --color-input-placeholder: #888899; /* Matches 'light-gray-text' */
+  --color-input-label: #8a92a6; /* Not directly used, but kept */
 
   /* Buttons */
-  --color-button-primary: #837cff;
-  --color-button-primary-text: #121212;
-  --color-button-secondary-white: #ffffff;
-  --color-button-tertiary-text: #b3b3b3;
-  --color-button-chat-prompt: #3a3b3f;
+  --color-button-primary: #837cff; /* Kept, but specific gradient used elsewhere */
+  --color-button-primary-text: #121212; /* Kept */
+  --color-button-secondary-white: #ffffff; /* Kept */
+  --color-button-tertiary-text: #b3b3b3; /* Kept */
+  --color-button-chat-prompt: #3a3b3f; /* Kept, consider if needed */
+
+  /* NEW: Button Gradients derived from Figma */
+  --color-gradient-chat-button-from: #6D28D9; /* A deeper purple for chat button */
+  --color-gradient-chat-button-to: #4F46E5;   /* A deeper blue for chat button */
+  --color-gradient-upgrade-from: #8B5CF6;
+  --color-gradient-upgrade-to: #6B4FF6;
 
   /* Backgrounds */
-  --color-background-dashboard: #202020;
-  --color-background-onboarding: #101010;
+  --color-background-dashboard: #0E0E1B; /* Matches 'dark-bg' */
+  --color-background-sidebar: #1B1B2B; /* Matches 'dark-sidebar' */
+  --color-background-card: #20202F; /* Matches 'dark-card' */
+  --color-background-onboarding: #101010; /* Not directly used, but kept */
+
+  /* Borders */
+  --color-border-main: #33334A; /* Matches 'dark-border' */
 
   /* Glass / Card Elements */
-  --color-glass-stroke: #202020;
-  --color-glass-fill: #ffffff;
-  --color-card: #373a3f;
+  --color-glass-stroke: #202020; /* Not directly used, but kept */
+  --color-glass-fill: #ffffff; /* Not directly used, but kept */
+  --color-card: #20202F; /* Matches 'dark-card' - Redundant if using background-card */
 
   /* Gradients */
-  --color-gradient-linear-stroke: #ffffff;
-  --color-gradient-card-circle: #837cff;
-  --color-gradient-text: #837cff;
+  --color-gradient-linear-stroke: #ffffff; /* Not directly used, but kept */
+  --color-gradient-card-circle: #837cff; /* Not directly used, but kept */
+  --color-gradient-text: #837cff; /* Not directly used, but kept */
+  --color-gradient-accent-purple: #8B5CF6; /* For general accent gradients like app icon */
+  --color-gradient-accent-blue: #3B82F6;   /* For general accent gradients like app icon */
+
 
   /* Typography Scale */
   --font-primary: 'Poppins', sans-serif;
@@ -57,4 +75,4 @@
   --text-h5: 1.5rem; /* 24px */
 
   --heading-font-weight: 600;
-} 
+}
