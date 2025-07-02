@@ -26,7 +26,7 @@ const Login = () => {
   });
 
   const handleSubmit = async (values, { setSubmitting }) => {
-    setMessage({ type: "", text: "" }); // Clear previous messages
+    setMessage({ type: "", text: "" }); 
     setSubmitting(true);
     try {
       const response = await axios.post(

@@ -1,8 +1,31 @@
 import React from "react";
 import { MessageSquareText, Shield, User, ChevronLeft } from "lucide-react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function TopBar({ isCollapsed, onToggleCollapse }) {
   const [showProfileMenu, setShowProfileMenu] = React.useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await axios.post(
+        "http://localhost:8001/api/v1/users/logout",
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+
+      // Optionally clear localStorage/sessionStorage
+      // localStorage.removeItem("user");
+
+      navigate("/login"); // Redirect to login page
+    } catch (error) {
+      console.error("Logout failed:", error.response?.data || error.message);
+      alert("Failed to logout. Try again.");
+    }
+  };
 
   return (
     <div className="bg-gray-800 border-b border-gray-700 px-6 py-4 flex items-center justify-between">
@@ -52,7 +75,10 @@ export default function TopBar({ isCollapsed, onToggleCollapse }) {
                 Customize Bot
               </button>
               <hr className="border-gray-600 my-2" />
-              <button className="w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-600 transition-colors">
+              <button
+                className="w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-600 transition-colors"
+                onClick={handleLogout}
+              >
                 Logout
               </button>
             </div>
