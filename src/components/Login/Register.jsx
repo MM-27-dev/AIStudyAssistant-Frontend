@@ -3,8 +3,8 @@ import { FcGoogle } from "react-icons/fc";
 import { Eye, EyeOff } from "lucide-react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthService } from "../../services/authServices";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -37,29 +37,34 @@ const Register = () => {
     ),
   });
 
- const handleSubmit = async (values, { setSubmitting, resetForm }) => {
-   try {
-     const response = await axios.post(
-       "http://localhost:8001/api/v1/users/register",
-       {
-         username: values.name.toLowerCase(),
-         email: values.email,
-         password: values.password,
-       }
-     );
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    setSubmitting(true);
 
-     if (response?.data?.statusCode === 200) {
-       alert("✅ Registration successful!");
-       resetForm();
-       navigate("/login"); // 👈 Navigate to login
-     }
-   } catch (error) {
-     console.error("Registration error:", error);
-     alert("❌ Registration failed. Please try again.");
-   } finally {
-     setSubmitting(false);
-   }
- };
+    try {
+      const payload = {
+        username: values.name.toLowerCase(),
+        email: values.email,
+        password: values.password,
+      };
+
+      const response = await AuthService.signup(payload);
+
+      if (response?.data?.statusCode === 200) {
+        alert("✅ Registration successful!");
+        resetForm();
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Registration error:", error);
+      const errorMessage =
+        error.response?.data?.message ||
+        "❌ Registration failed. Please try again.";
+      alert(errorMessage);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#1E1F24] px-4 py-10">

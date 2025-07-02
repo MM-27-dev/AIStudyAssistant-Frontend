@@ -7,8 +7,8 @@ import {
   Settings,
   UserPlus,
 } from "lucide-react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthService } from "../../services/authServices";
 
 export default function TopBar() {
   // Removed isCollapsed and onToggleCollapse props
@@ -17,23 +17,15 @@ export default function TopBar() {
 
   const handleLogout = async () => {
     try {
-      await axios.post(
-        "http://localhost:8001/api/v1/users/logout",
-        {},
-        {
-          withCredentials: true,
-        }
-      );
+      await AuthService.logout(); // ✅ Use service method
 
-      // Optionally clear localStorage/sessionStorage
-      // localStorage.removeItem("user");
-
-      navigate("/login"); // Redirect to login page
+      navigate("/login"); // ✅ Redirect after logout
     } catch (error) {
       console.error("Logout failed:", error.response?.data || error.message);
       alert("Failed to logout. Try again.");
     }
   };
+  
   return (
     <div className="bg-[#1B1B2B] border-b border-[#33334A] px-4 sm:px-6 py-4 flex items-center justify-end font-poppins">
       {" "}

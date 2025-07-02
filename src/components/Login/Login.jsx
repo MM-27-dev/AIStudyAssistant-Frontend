@@ -5,12 +5,11 @@ import { Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
+import { AuthService } from "../../services/authServices";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [message, setMessage] = useState({ type: "", text: "" }); // State for messages
-  const [showModal, setShowModal] = useState(false); // State for modal visibility
+  const [message, setMessage] = useState(null); // null | { type, text }
   const navigate = useNavigate();
 
   const initialValues = {
@@ -26,45 +25,28 @@ const Login = () => {
   });
 
   const handleSubmit = async (values, { setSubmitting }) => {
-    setMessage({ type: "", text: "" }); 
+    setMessage(null);
     setSubmitting(true);
-    try {
-      const response = await axios.post(
-        "http://localhost:8001/api/v1/users/login",
-        {
-          email: values.email,
-          password: values.password,
-        },
-        {
-          withCredentials: true,
-        }
-      );
 
-      if (response?.data?.statusCode === 200) {
+    try {
+      const response = await AuthService.login({
+        email: values.email,
+        password: values.password,
+      });
+
+      if (response.data.statusCode === 200) {
         setMessage({ type: "success", text: "Login successful!" });
-        setShowModal(true);
-        // Optional: save user to localStorage/sessionStorage
-        // localStorage.setItem("user", JSON.stringify(response.data.data));
         setTimeout(() => {
-          setShowModal(false);
-          navigate("/chatdashboard"); // 👈 redirect to dashboard after a short delay
-        }, 1500); // Wait for 1.5 seconds before redirecting
+          navigate("/chatdashboard");
+        }, 1000);
       }
     } catch (error) {
-      console.error("Login error:", error.response?.data || error.message);
-      setMessage({
-        type: "error",
-        text:
-          error.response?.data?.message || "Login failed. Please try again.",
-      });
-      setShowModal(true);
+      const errorMessage =
+        error.response?.data?.message || "Login failed. Please try again.";
+      setMessage({ type: "error", text: errorMessage });
     } finally {
       setSubmitting(false);
     }
-  };
-
-  const handleSignUp = () => {
-    navigate("/register");
   };
 
   return (
@@ -73,11 +55,7 @@ const Login = () => {
         {/* Left Form Section */}
         <div className="w-full md:w-1/2 px-6 sm:px-10 py-10">
           <div className="mb-8 flex items-center space-x-2">
-            <div className="bg-[#7F5AF0] rounded-full p-2">
-              <span role="img" aria-label="bot">
-                🤖
-              </span>
-            </div>
+            <div className="bg-[#7F5AF0] rounded-full p-2">🤖</div>
             <h1 className="text-2xl font-bold text-white">BotBuzz</h1>
           </div>
 
@@ -86,6 +64,16 @@ const Login = () => {
             Add your credentials to log in
           </p>
 
+          {message && (
+            <div
+              className={`text-sm mb-4 ${
+                message.type === "error" ? "text-red-500" : "text-green-400"
+              }`}
+            >
+              {message.text}
+            </div>
+          )}
+
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -93,7 +81,7 @@ const Login = () => {
           >
             {({ isSubmitting }) => (
               <Form className="space-y-5 text-sm">
-                {/* Email Field */}
+                {/* Email */}
                 <div>
                   <label className="text-[#B0B0B0]">Your email*</label>
                   <Field
@@ -109,7 +97,7 @@ const Login = () => {
                   />
                 </div>
 
-                {/* Password Field */}
+                {/* Password */}
                 <div>
                   <label className="text-[#B0B0B0]">Password*</label>
                   <div className="relative">
@@ -121,7 +109,7 @@ const Login = () => {
                     />
                     <button
                       type="button"
-                      className="absolute right-3 top-3 text-gray-400 cursor-pointer w-5 h-5"
+                      className="absolute right-3 top-3 text-gray-400"
                       onClick={() => setShowPassword(!showPassword)}
                     >
                       {showPassword ? (
@@ -138,7 +126,7 @@ const Login = () => {
                   />
                 </div>
 
-                {/* Terms & Conditions */}
+                {/* Terms */}
                 <div className="flex items-center text-[#B0B0B0] text-sm">
                   <Field
                     type="checkbox"
@@ -153,7 +141,7 @@ const Login = () => {
                   className="text-red-500 text-xs"
                 />
 
-                {/* Submit Button */}
+                {/* Submit */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
@@ -169,7 +157,7 @@ const Login = () => {
                   <div className="h-px flex-1 bg-[#3C3C3C]" />
                 </div>
 
-                {/* Google Login */}
+                {/* Google Login (Placeholder) */}
                 <button
                   type="button"
                   className="w-full flex items-center justify-center space-x-3 bg-black border border-[#2C2C2C] py-2 rounded-md hover:bg-[#111]"
@@ -183,22 +171,21 @@ const Login = () => {
 
           {/* Sign Up Link */}
           <p className="mt-6 text-sm text-[#B0B0B0] text-center">
-            Don’t have an Account?{" "}
-            <a
-              href="#"
-              className="text-[#A78BFA] hover:underline"
-              onClick={handleSignUp}
+            Don’t have an account?{" "}
+            <span
+              onClick={() => navigate("/register")}
+              className="text-[#A78BFA] hover:underline cursor-pointer"
             >
               Sign up
-            </a>
+            </span>
           </p>
         </div>
 
-        {/* Right Side Image */}
+        {/* Right Image */}
         <div className="hidden md:block w-full md:w-1/2">
           <img
             src="/login.svg"
-            alt="VR User"
+            alt="Login Illustration"
             className="h-full w-full object-cover rounded-xl"
           />
         </div>

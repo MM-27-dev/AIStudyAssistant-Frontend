@@ -1,0 +1,4 @@
+{
+  "BACKEND_URL": "https://ts-dev-server.exthalpy.ai/exthalpy-service",
+  "FRONTEND_URL": "http://localhost:5173"
+}
