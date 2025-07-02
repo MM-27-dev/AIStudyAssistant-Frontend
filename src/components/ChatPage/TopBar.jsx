@@ -24,15 +24,16 @@ export default function TopBar() {
           withCredentials: true,
         }
       );
-      navigate("/login");
+
+      // Optionally clear localStorage/sessionStorage
+      // localStorage.removeItem("user");
+
+      navigate("/login"); // Redirect to login page
     } catch (error) {
       console.error("Logout failed:", error.response?.data || error.message);
       alert("Failed to logout. Try again.");
-    } finally {
-      setShowProfileMenu(false);
     }
   };
-
   return (
     <div className="bg-[#1B1B2B] border-b border-[#33334A] px-4 sm:px-6 py-4 flex items-center justify-end font-poppins">
       {" "}
