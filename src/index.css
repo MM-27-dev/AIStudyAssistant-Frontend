@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+/* Custom Design Tokens (Theme Variables) */
+@theme {
+  /* Typography Colors */
+  --color-typography-main-white: #ffffff;
+  --color-typography-light-white: #f9f9fa;
+  --color-typography-black: #202020;
+  --color-typography-dark-grey: #2d2f33;
+  --color-typography-medium-grey: #62656a;
+  --color-typography-light-grey: #a3a3a4;
+
+  /* Icon Colors */
+  --color-icon-green: #b8d447;
+  --color-icon-peach: #f79e87;
+  --color-icon-light-cyan: #b7e6f4;
+  --color-icon-light-yellow: #fae96b;
+  --color-icon-light-blue: #9bb8d3;
+  --color-icon-purple: #837cff;
+  --color-icon-white: #ffffff;
+  --color-icon-black: #202020;
+
+  /* Input Fields */
+  --color-input-dark: #25252c;
+  --color-input-placeholder: #696e7c;
+  --color-input-label: #8a92a6;
+
+  /* Buttons */
+  --color-button-primary: #837cff;
+  --color-button-primary-text: #121212;
+  --color-button-secondary-white: #ffffff;
+  --color-button-tertiary-text: #b3b3b3;
+  --color-button-chat-prompt: #3a3b3f;
+
+  /* Backgrounds */
+  --color-background-dashboard: #202020;
+  --color-background-onboarding: #101010;
+
+  /* Glass / Card Elements */
+  --color-glass-stroke: #202020;
+  --color-glass-fill: #ffffff;
+  --color-card: #373a3f;
+
+  /* Gradients */
+  --color-gradient-linear-stroke: #ffffff;
+  --color-gradient-card-circle: #837cff;
+  --color-gradient-text: #837cff;
+
+  /* Typography Scale */
+  --font-primary: 'Poppins', sans-serif;
+
+  --text-h1: 3.5rem; /* 56px */
+  --text-h2: 3rem;   /* 48px */
+  --text-h3: 2.5rem; /* 40px */
+  --text-h4: 2rem;   /* 32px */
+  --text-h5: 1.5rem; /* 24px */
+
+  --heading-font-weight: 600;
+} 
