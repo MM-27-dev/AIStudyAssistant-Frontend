@@ -8,7 +8,8 @@ import {
   UserPlus,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { AuthService } from "../../services/authServices";
+import { AuthService } from "../../Services/authServices";
+
 
 export default function TopBar() {
   // Removed isCollapsed and onToggleCollapse props

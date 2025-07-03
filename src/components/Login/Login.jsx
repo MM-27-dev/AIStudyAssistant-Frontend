@@ -5,7 +5,8 @@ import { Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { AuthService } from "../../services/authServices";
+import { AuthService } from "../../Services/authServices";
+
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
