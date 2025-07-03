@@ -25,7 +25,7 @@ export class AuthService {
       headers: {
         "Content-Type": "application/json",
       },
-      withCredentials: true, // include cookies if needed
+      withCredentials: true,
     });
   }
 
