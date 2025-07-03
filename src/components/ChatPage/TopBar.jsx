@@ -12,15 +12,13 @@ import { AuthService } from "../../Services/authServices";
 
 
 export default function TopBar() {
-  // Removed isCollapsed and onToggleCollapse props
   const [showProfileMenu, setShowProfileMenu] = React.useState(false);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await AuthService.logout(); // ✅ Use service method
-
-      navigate("/login"); // ✅ Redirect after logout
+      await AuthService.logout(); 
+      navigate("/login"); 
     } catch (error) {
       console.error("Logout failed:", error.response?.data || error.message);
       alert("Failed to logout. Try again.");
