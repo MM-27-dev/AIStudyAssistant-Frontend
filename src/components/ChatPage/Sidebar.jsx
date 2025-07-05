@@ -5,11 +5,11 @@ import {
   Users,
   Settings,
   ChevronDown,
-  ChevronRight, // Used for expanding the sidebar (when it's collapsed)
+  ChevronRight, 
   Sparkles,
   ArrowRight,
   MessageSquareText,
-  ChevronLeft, // Used for collapsing the sidebar (when it's expanded)
+  ChevronLeft, 
 } from "lucide-react";
 
 export default function Sidebar({ isCollapsed, onToggleCollapse }) {

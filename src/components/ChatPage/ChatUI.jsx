@@ -73,7 +73,7 @@ function ChatUI() {
           </div>
 
           {/* Chat Input */}
-          <ChatInput />
+          <ChatInput/>
         </div>
       </div>
     </div>
