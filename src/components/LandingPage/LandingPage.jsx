@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import FAQSection from "./FAQSection";
 import Features from "./Features";
 import Footer from "./Footer";
@@ -23,6 +23,6 @@ const LandingPage = () => {
       <Footer />
     </div>
   );
-};
+}
 
-export default LandingPage;
+export default LandingPage
