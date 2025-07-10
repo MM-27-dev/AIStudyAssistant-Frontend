@@ -1,0 +1,4 @@
+{
+  "BACKEND_URL": "https://aistudyassistant-backend-1.onrender.com/api/v1",
+  "FRONTEND_URL": "https://ai-study-assistant-frontend-umber.vercel.app/"
+}
