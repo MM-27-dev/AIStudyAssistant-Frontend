@@ -1,4 +1,4 @@
 {
-  "BACKEND_URL": "https://ts-dev-server.exthalpy.ai/exthalpy-service",
-  "FRONTEND_URL": "http://localhost:5173"
+  "BACKEND_URL": "https://aistudyassistant-backend.onrender.com/api/v1",
+  "FRONTEND_URL": "https://ai-study-assistant-frontend-three.vercel.app"
 }
