@@ -35,9 +35,9 @@ const Login = () => {
 
       if (response.data.statusCode === 200) {
         setMessage({ type: "success", text: "Login successful!" });
-        setTimeout(() => {
-          navigate("/chatdashboard");
-        }, 1000);
+        // setTimeout(() => {
+        //   navigate("/chatdashboard");
+        // }, 1000);
       }
     } catch (error) {
       const errorMessage =
