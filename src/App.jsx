@@ -10,6 +10,8 @@ import ChatPage from "./Pages/ChatPage";
 import ProfileUpdatePage from "./Pages/ProfileUpdatePage";
 // import PricingPage from "./components/PricingPage/PricingPage"; // upcoming
 
+
+//  app componenet
 function App() {
   return (
     <Routes>
