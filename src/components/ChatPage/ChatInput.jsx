@@ -272,16 +272,82 @@ import { AuthService } from "../../Services/authServices";
 
 export default function ChatInput({ onSendMessage, sessionId }) {
   const [message, setMessage] = useState("");
+  const [file, setFile] = useState(null);
 
   // Handle message send
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (!message.trim()) return;
+
+  //   try {
+  //     let currentSessionId = sessionId;
+
+  //     // If no session ID, create a new session
+  //     if (!currentSessionId) {
+  //       const sessionRes = await AuthService.createSession({
+  //         title: "New Chat Session",
+  //       });
+  //       currentSessionId = sessionRes.data._id;
+  //       sessionStorage.setItem("chatSessionId", currentSessionId);
+  //     }
+
+  //     // Format timestamp
+  //     const timestamp = new Date().toLocaleTimeString([], {
+  //       hour: "2-digit",
+  //       minute: "2-digit",
+  //     });
+
+  //     // Add user message to chat window
+  //     const userMessage = {
+  //       text: message,
+  //       type: "user",
+  //       timestamp,
+  //     };
+  //     onSendMessage(userMessage);
+
+  //     // Store original message text and clear input
+  //     const messageContent = message;
+  //     setMessage("");
+
+  //     // Send message to server and get AI response
+  //     const response = await AuthService.sendMessageToSession(
+  //       currentSessionId,
+  //       {
+  //         content: messageContent,
+  //         isUser: true,
+  //         messageType: "text",
+  //       }
+  //     );
+
+  //     const aiMessage = response.data.aiMessage;
+
+  //     if (aiMessage) {
+  //       const botMessage = {
+  //         text: aiMessage.content,
+  //         type: "bot",
+  //         timestamp: new Date(aiMessage.createdAt).toLocaleTimeString([], {
+  //           hour: "2-digit",
+  //           minute: "2-digit",
+  //         }),
+  //         isLoading: false,
+  //       };
+
+  //       // Replace temporary loading message with actual response
+  //       onSendMessage(botMessage, true);
+  //     }
+  //   } catch (err) {
+  //     console.error("Chat error:", err);
+  //     // Optional: show an error in UI or log it
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!message.trim()) return;
+    if (!message.trim() && !file) return;
 
     try {
       let currentSessionId = sessionId;
 
-      // If no session ID, create a new session
       if (!currentSessionId) {
         const sessionRes = await AuthService.createSession({
           title: "New Chat Session",
@@ -290,55 +356,86 @@ export default function ChatInput({ onSendMessage, sessionId }) {
         sessionStorage.setItem("chatSessionId", currentSessionId);
       }
 
-      
-
-      // Format timestamp
       const timestamp = new Date().toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
       });
 
-      // Add user message to chat window
+      // const userMessage = {
+      //   text: message || (file ? file.name : ""),
+      //   type: "user",
+      //   timestamp,
+      // };
+      // onSendMessage(userMessage);
       const userMessage = {
-        text: message,
+        text: message || (file ? file.name : ""),
         type: "user",
         timestamp,
+        messageType: file ? "file" : "text",
+        file: file
+          ? {
+              originalName: file.name,
+              filename: file.name, // or actual one returned by server
+            }
+          : null,
       };
       onSendMessage(userMessage);
 
-      // Store original message text and clear input
-      const messageContent = message;
       setMessage("");
 
-      // Send message to server and get AI response
-      const response = await AuthService.sendMessageToSession(
-        currentSessionId,
-        {
-          content: messageContent,
-          isUser: true,
-          messageType: "text",
+      if (file) {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("message", message);
+
+        const response = await AuthService.sendFileMessage(
+          currentSessionId,
+          formData
+        );
+        const aiMessage = response.data.aiMessage;
+
+        if (aiMessage) {
+          const botMessage = {
+            text: aiMessage.content,
+            type: "bot",
+            timestamp: new Date(aiMessage.createdAt).toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            }),
+            isLoading: false,
+          };
+          onSendMessage(botMessage, true);
         }
-      );
 
-      const aiMessage = response.data.aiMessage;
+        setFile(null);
+      } else {
+        // Handle text message only
+        const response = await AuthService.sendMessageToSession(
+          currentSessionId,
+          {
+            content: message,
+            isUser: true,
+            messageType: "text",
+          }
+        );
 
-      if (aiMessage) {
-        const botMessage = {
-          text: aiMessage.content,
-          type: "bot",
-          timestamp: new Date(aiMessage.createdAt).toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
-          }),
-          isLoading: false,
-        };
+        const aiMessage = response.data.aiMessage;
 
-        // Replace temporary loading message with actual response
-        onSendMessage(botMessage, true);
+        if (aiMessage) {
+          const botMessage = {
+            text: aiMessage.content,
+            type: "bot",
+            timestamp: new Date(aiMessage.createdAt).toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            }),
+            isLoading: false,
+          };
+          onSendMessage(botMessage, true);
+        }
       }
     } catch (err) {
       console.error("Chat error:", err);
-      // Optional: show an error in UI or log it
     }
   };
 
@@ -347,6 +444,14 @@ export default function ChatInput({ onSendMessage, sessionId }) {
       <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
         {/* Chat input field */}
         <div className="relative bg-[#1B1B2B] rounded-xl border border-[#33334A] focus-within:border-[#33334A] transition-colors">
+          {/* <input
+            type="text"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Enter a prompt here"
+            className="w-full bg-transparent pl-5 pr-32 py-3 text-[#CCCCCC] placeholder-[#888899] focus:outline-none text-sm sm:text-base font-poppins"
+          /> */}
+
           <input
             type="text"
             value={message}
@@ -355,14 +460,39 @@ export default function ChatInput({ onSendMessage, sessionId }) {
             className="w-full bg-transparent pl-5 pr-32 py-3 text-[#CCCCCC] placeholder-[#888899] focus:outline-none text-sm sm:text-base font-poppins"
           />
 
+          <input
+            type="file"
+            id="file-upload"
+            className="hidden"
+            onChange={(e) => {
+              const selectedFile = e.target.files[0];
+              setFile(selectedFile);
+              if (!message.trim()) {
+                setMessage(`Attached file: ${selectedFile.name}`);
+              }
+            }}
+          />
+
           {/* Action buttons: attach, mic, send */}
           <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
-            <button
+            {/* <button
               type="button"
               className="p-2 rounded-lg hover:bg-gray-700 transition-colors"
             >
               <Paperclip className="w-5 h-5 text-[#888899]" />
-            </button>
+            </button> */}
+            <input
+              type="file"
+              id="file-upload"
+              className="hidden"
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+            <label
+              htmlFor="file-upload"
+              className="p-2 rounded-lg hover:bg-gray-700 transition-colors cursor-pointer"
+            >
+              <Paperclip className="w-5 h-5 text-[#888899]" />
+            </label>
 
             <button
               type="button"
@@ -393,4 +523,3 @@ export default function ChatInput({ onSendMessage, sessionId }) {
     </div>
   );
 }
-

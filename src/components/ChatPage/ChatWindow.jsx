@@ -51,11 +51,30 @@ export default function ChatWindow({ messages }) {
             <>
               <div className="flex-1" />
               <div className="flex items-start gap-3">
-                <div className="bg-[#2a3441] rounded-xl p-4 max-w-[80%]">
-                  <p className="text-[#e5e7eb] text-sm leading-relaxed">
+                {/* <div className="bg-[#2a3441] rounded-xl p-4 max-w-[80%]"> */}
+                  {/* <p className="text-[#e5e7eb] text-sm leading-relaxed">
                     {msg.text}
-                  </p>
-                </div>
+                  </p> */}
+                  <div className="bg-[#2a3441] rounded-xl p-4 max-w-[80%]">
+                    {/* Show file if user uploaded one */}
+                    {msg.messageType === "file" && msg.file?.originalName && (
+                      <a
+                        href={`/api/files/${msg.file.filename}`} // Update this to your actual file route
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-400 text-sm mb-2 block underline"
+                      >
+                        📎 Attached file: {msg.file.originalName}
+                      </a>
+                    )}
+
+                    {/* Show user-typed message if present */}
+                    {msg.text && (
+                      <p className="text-[#e5e7eb] text-sm leading-relaxed">
+                        {msg.text}
+                      </p>
+                    )}
+                  </div>
                 <div className="flex flex-col items-end gap-1">
                   <div className="w-8 h-8 bg-[#6366f1] rounded-full flex items-center justify-center">
                     <User className="w-4 h-4 text-white" />

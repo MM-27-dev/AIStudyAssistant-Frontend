@@ -15,6 +15,7 @@ export class AuthService {
   static SEND_MESSAGE = `${BACKEND_URL}/chat/session`;
   static END_SESSION = `${BACKEND_URL}/chat/session`;
   static GET_MESSAGE = `${BACKEND_URL}/chat/session`;
+  static SEND_FILE = `${BACKEND_URL}/chat/session`;
 
   static signup(payload) {
     return axios.post(AuthService.USER_REGISTER, payload, {
@@ -108,6 +109,20 @@ export class AuthService {
     return axios.get(`${AuthService.GET_MESSAGE}/${sessionId}/messages`, {
       withCredentials: true,
     });
+  }
+
+  static sendFileMessage(sessionId, formData) {
+    return axios.post(
+      `${AuthService.SEND_FILE}/${sessionId}/message/file`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true,
+        
+      }
+    );
   }
 }
 

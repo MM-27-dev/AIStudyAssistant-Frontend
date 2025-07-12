@@ -6,27 +6,27 @@
   /* Typography Colors */
   --color-typography-main-white: #ffffff;
   --color-typography-light-white: #f9f9fa; /* Not directly used in the dark theme, but kept */
-  --color-typography-black: #202020;       /* Not directly used in the dark theme, but kept */
-  --color-typography-dark-grey: #2d2f33;   /* Not directly used in the dark theme, but kept */
+  --color-typography-black: #202020; /* Not directly used in the dark theme, but kept */
+  --color-typography-dark-grey: #2d2f33; /* Not directly used in the dark theme, but kept */
   --color-typography-medium-grey: #62656a; /* Not directly used in the dark theme, but kept */
-  --color-typography-light-grey: #a3a3a4;  /* Not directly used in the dark theme, but kept */
+  --color-typography-light-grey: #a3a3a4; /* Not directly used in the dark theme, but kept */
 
   /* NEW: Text Colors derived from Figma */
-  --color-text-primary: #CCCCCC; /* 'dark-text' */
+  --color-text-primary: #cccccc; /* 'dark-text' */
   --color-text-secondary: #888899; /* 'light-gray-text' */
 
   /* Icon Colors */
-  --color-icon-green: #6BD27F; /* Matches Figma suggestion card green */
-  --color-icon-peach: #FF6B6B; /* Matches Figma suggestion card red-ish */
-  --color-icon-light-cyan: #3B3BFF; /* Matches Figma suggestion card blue */
-  --color-icon-light-yellow: #FFD43B; /* Matches Figma suggestion card yellow */
+  --color-icon-green: #6bd27f; /* Matches Figma suggestion card green */
+  --color-icon-peach: #ff6b6b; /* Matches Figma suggestion card red-ish */
+  --color-icon-light-cyan: #3b3bff; /* Matches Figma suggestion card blue */
+  --color-icon-light-yellow: #ffd43b; /* Matches Figma suggestion card yellow */
   --color-icon-light-blue: #9bb8d3; /* Not directly used for current icons, but kept */
-  --color-icon-purple: #837cff;    /* Not directly used for current icons, but kept */
+  --color-icon-purple: #837cff; /* Not directly used for current icons, but kept */
   --color-icon-white: #ffffff;
   --color-icon-black: #202020;
 
   /* Input Fields */
-  --color-input-background: #1B1B2B; /* Matches 'dark-sidebar' */
+  --color-input-background: #1b1b2b; /* Matches 'dark-sidebar' */
   --color-input-placeholder: #888899; /* Matches 'light-gray-text' */
   --color-input-label: #8a92a6; /* Not directly used, but kept */
 
@@ -38,40 +38,39 @@
   --color-button-chat-prompt: #3a3b3f; /* Kept, consider if needed */
 
   /* NEW: Button Gradients derived from Figma */
-  --color-gradient-chat-button-from: #6D28D9; /* A deeper purple for chat button */
-  --color-gradient-chat-button-to: #4F46E5;   /* A deeper blue for chat button */
-  --color-gradient-upgrade-from: #8B5CF6;
-  --color-gradient-upgrade-to: #6B4FF6;
+  --color-gradient-chat-button-from: #6d28d9; /* A deeper purple for chat button */
+  --color-gradient-chat-button-to: #4f46e5; /* A deeper blue for chat button */
+  --color-gradient-upgrade-from: #8b5cf6;
+  --color-gradient-upgrade-to: #6b4ff6;
 
   /* Backgrounds */
-  --color-background-dashboard: #0E0E1B; /* Matches 'dark-bg' */
-  --color-background-sidebar: #1B1B2B; /* Matches 'dark-sidebar' */
-  --color-background-card: #20202F; /* Matches 'dark-card' */
+  --color-background-dashboard: #0e0e1b; /* Matches 'dark-bg' */
+  --color-background-sidebar: #1b1b2b; /* Matches 'dark-sidebar' */
+  --color-background-card: #20202f; /* Matches 'dark-card' */
   --color-background-onboarding: #101010; /* Not directly used, but kept */
 
   /* Borders */
-  --color-border-main: #33334A; /* Matches 'dark-border' */
+  --color-border-main: #33334a; /* Matches 'dark-border' */
 
   /* Glass / Card Elements */
   --color-glass-stroke: #202020; /* Not directly used, but kept */
   --color-glass-fill: #ffffff; /* Not directly used, but kept */
-  --color-card: #20202F; /* Matches 'dark-card' - Redundant if using background-card */
+  --color-card: #20202f; /* Matches 'dark-card' - Redundant if using background-card */
 
   /* Gradients */
   --color-gradient-linear-stroke: #ffffff; /* Not directly used, but kept */
   --color-gradient-card-circle: #837cff; /* Not directly used, but kept */
   --color-gradient-text: #837cff; /* Not directly used, but kept */
-  --color-gradient-accent-purple: #8B5CF6; /* For general accent gradients like app icon */
-  --color-gradient-accent-blue: #3B82F6;   /* For general accent gradients like app icon */
-
+  --color-gradient-accent-purple: #8b5cf6; /* For general accent gradients like app icon */
+  --color-gradient-accent-blue: #3b82f6; /* For general accent gradients like app icon */
 
   /* Typography Scale */
-  --font-primary: 'Poppins', sans-serif;
+  --font-primary: "Poppins", sans-serif;
 
   --text-h1: 3.5rem; /* 56px */
-  --text-h2: 3rem;   /* 48px */
+  --text-h2: 3rem; /* 48px */
   --text-h3: 2.5rem; /* 40px */
-  --text-h4: 2rem;   /* 32px */
+  --text-h4: 2rem; /* 32px */
   --text-h5: 1.5rem; /* 24px */
 
   --heading-font-weight: 600;
@@ -93,10 +92,15 @@
   border-radius: 100px;
 }
 
-
 @keyframes blink {
-  0%, 80%, 100% { opacity: 0; }
-  40% { opacity: 1; }
+  0%,
+  80%,
+  100% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
 }
 
 .animate-typingDot {
@@ -111,3 +115,29 @@
 .delay-300 {
   animation-delay: 0.3s;
 }
+
+button {
+  cursor: pointer !important;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease-out;
+}
+
+.fadeIn {
+  animation: fadeIn 0.3s ease-in;
+}
+
+
+
