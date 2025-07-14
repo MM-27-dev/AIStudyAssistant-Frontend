@@ -66,12 +66,12 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#1E1F24] px-4 py-10">
-      <div className="w-full max-w-6xl flex flex-col md:flex-row bg-[#1E1F24] rounded-2xl overflow-hidden shadow-xl">
+    <div className="min-h-screen flex items-center justify-center bg-[#1E1F24] px-4 py-8">
+      <div className="w-full max-w-6xl min-h-screen h-[112vh] flex flex-col md:flex-row bg-[#1E1F24] rounded-2xl overflow-hidden shadow-xl">
         {/* Left Form Section */}
-        <div className="w-full md:w-1/2 px-6 sm:px-10 py-10">
-          <div className="mb-8 flex items-center space-x-2">
-            <div className="bg-[#7F5AF0] rounded-full p-2">
+        <div className="w-full md:w-1/2 px-6 sm:px-10 ">
+          <div className="mb-2 flex items-center space-x-2">
+            <div className="bg-[#7F5AF0] rounded-full ">
               <span role="img" aria-label="bot">
                 🤖
               </span>
@@ -82,7 +82,7 @@ const Register = () => {
           <h2 className="text-3xl font-semibold text-white mb-2">
             Create an Account
           </h2>
-          <p className="text-sm text-[#B0B0B0] mb-6">
+          <p className="text-sm text-[#B0B0B0] mb-1">
             Kindly fill in your details to create an account
           </p>
 
@@ -119,7 +119,7 @@ const Register = () => {
                   <ErrorMessage
                     name="email"
                     component="div"
-                    className="text-red-500 text-xs mt-1"
+                    className="text-red-500 text-xs mt-0"
                   />
                 </div>
 
@@ -197,7 +197,7 @@ const Register = () => {
                   {isSubmitting ? "Submitting..." : "Sign up"}
                 </button>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
                   <div className="h-px flex-1 bg-[#3C3C3C]" />
                   <span className="text-[#B0B0B0] text-sm">Or</span>
                   <div className="h-px flex-1 bg-[#3C3C3C]" />
@@ -214,7 +214,7 @@ const Register = () => {
             )}
           </Formik>
 
-          <p className="mt-6 text-sm text-[#B0B0B0] text-center">
+          <p className="mt-4 text-sm text-[#B0B0B0] text-center">
             Already have an Account?{" "}
             <a
               href="/login"
