@@ -51,7 +51,7 @@ export default function ProfileUpdatePage() {
   ];
 
   return (
-    <div className="flex-1 flex flex-col overflow-hidden bg-black">
+    <div className="h-screen flex flex-col overflow-hidden">
       <div className="border-b border-[#2a3441] px-6 py-4">
         <div className="flex space-x-8 overflow-x-auto">
           {tabs.map((tab) => (
@@ -70,7 +70,7 @@ export default function ProfileUpdatePage() {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-6">
+      <div className="flex-1 overflow-auto p-6 min-h-0">
         <div className="max-w-4xl">
           {activeTab === "Profile Details" && <ProfileDetailsForm />}
 
