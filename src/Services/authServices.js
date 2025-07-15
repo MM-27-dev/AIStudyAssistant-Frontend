@@ -16,6 +16,20 @@ export class AuthService {
   static END_SESSION = `${BACKEND_URL}/chat/session`;
   static GET_MESSAGE = `${BACKEND_URL}/chat/session`;
   static SEND_FILE = `${BACKEND_URL}/chat/session`;
+  static OPENAI_VOICE_TOKEN = `${BACKEND_URL}/chat/openai/token`;
+
+  static getVoiceToken(voice = "alloy") {
+    return axios.post(
+      AuthService.OPENAI_VOICE_TOKEN,
+      { voice },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      }
+    );
+  }
 
   static signup(payload) {
     return axios.post(AuthService.USER_REGISTER, payload, {
@@ -120,7 +134,6 @@ export class AuthService {
           "Content-Type": "multipart/form-data",
         },
         withCredentials: true,
-        
       }
     );
   }

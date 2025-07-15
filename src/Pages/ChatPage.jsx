@@ -261,7 +261,6 @@ import { AuthService } from "../Services/authServices";
 function ChatPage() {
   const [hasStartedChat, setHasStartedChat] = useState(false);
   const [messages, setMessages] = useState([]);
-
   const [searchParams] = useSearchParams();
   const isNewChat = searchParams.get("newChat") === "true";
   const querySessionId = searchParams.get("sessionId");
@@ -338,7 +337,12 @@ function ChatPage() {
             <ChatWindow messages={messages} />
           )}
         </div>
-        <ChatInput onSendMessage={handleSendMessage} sessionId={sessionId} />
+        {/* <ChatInput onSendMessage={handleSendMessage} sessionId={sessionId} /> */}
+        <ChatInput
+          onSendMessage={handleSendMessage}
+          sessionId={sessionId}
+          setMessages={setMessages}
+        />
       </div>
     </div>
   );

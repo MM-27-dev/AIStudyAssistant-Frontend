@@ -1,139 +1,306 @@
 import { Bot } from "lucide-react";
 import React from "react";
+import { motion } from "framer-motion";
 
 const Footer = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  };
+
   return (
-    <footer className="px-4 sm:px-6 lg:px-8 py-16">
+    <motion.footer
+      className="px-4 sm:px-6 lg:px-8 py-16"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 mb-12">
-          <div className="col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
+        <motion.div
+          className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 mb-12"
+          variants={containerVariants}
+        >
+          <motion.div className="col-span-2" variants={itemVariants}>
+            <motion.div
+              className="flex items-center space-x-2 mb-4"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
               <div className="flex items-center space-x-2">
-                <img alt="logo-image" src="/logo.svg" className="w-8 h-8" />
-                <span className="text-xl font-bold">BotBuzz</span>
+                <motion.img
+                  alt="logo-image"
+                  src="/logo.svg"
+                  className="w-8 h-8"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.6 }}
+                />
+                <motion.span
+                  className="text-xl font-bold"
+                  whileHover={{ color: "#8b5cf6" }}
+                >
+                  BotBuzz
+                </motion.span>
               </div>
-            </div>
-            <p className="text-gray-400 mb-4">
+            </motion.div>
+            <motion.p className="text-gray-400 mb-4" variants={itemVariants}>
               Your ultimate AI-powered content and conversational companion.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
-          <div>
-            <h4 className="font-semibold mb-4">Resources</h4>
+          <motion.div variants={itemVariants}>
+            <motion.h4
+              className="font-semibold mb-4"
+              whileHover={{ color: "#8b5cf6" }}
+            >
+              Resources
+            </motion.h4>
             <ul className="space-y-2 text-gray-400">
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <motion.a
+                  href="#"
+                  className="hover:text-white transition-colors"
+                  whileHover={{ x: 5, color: "#ffffff" }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   Documentation
-                </a>
+                </motion.a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <motion.a
+                  href="#"
+                  className="hover:text-white transition-colors"
+                  whileHover={{ x: 5, color: "#ffffff" }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   API Reference
-                </a>
+                </motion.a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <motion.a
+                  href="#"
+                  className="hover:text-white transition-colors"
+                  whileHover={{ x: 5, color: "#ffffff" }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   Tutorials
-                </a>
+                </motion.a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <motion.a
+                  href="#"
+                  className="hover:text-white transition-colors"
+                  whileHover={{ x: 5, color: "#ffffff" }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   Blog
-                </a>
+                </motion.a>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
-          <div>
-            <h4 className="font-semibold mb-4">Pricing</h4>
+          <motion.div variants={itemVariants}>
+            <motion.h4
+              className="font-semibold mb-4"
+              whileHover={{ color: "#8b5cf6" }}
+            >
+              Pricing
+            </motion.h4>
             <ul className="space-y-2 text-gray-400">
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <motion.a
+                  href="#"
+                  className="hover:text-white transition-colors"
+                  whileHover={{ x: 5, color: "#ffffff" }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   Free Plan
-                </a>
+                </motion.a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <motion.a
+                  href="#"
+                  className="hover:text-white transition-colors"
+                  whileHover={{ x: 5, color: "#ffffff" }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   Plus Plan
-                </a>
+                </motion.a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <motion.a
+                  href="#"
+                  className="hover:text-white transition-colors"
+                  whileHover={{ x: 5, color: "#ffffff" }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   Pro Plan
-                </a>
+                </motion.a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <motion.a
+                  href="#"
+                  className="hover:text-white transition-colors"
+                  whileHover={{ x: 5, color: "#ffffff" }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   Enterprise
-                </a>
+                </motion.a>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
-          <div>
-            <h4 className="font-semibold mb-4">Company</h4>
+          <motion.div variants={itemVariants}>
+            <motion.h4
+              className="font-semibold mb-4"
+              whileHover={{ color: "#8b5cf6" }}
+            >
+              Company
+            </motion.h4>
             <ul className="space-y-2 text-gray-400">
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <motion.a
+                  href="#"
+                  className="hover:text-white transition-colors"
+                  whileHover={{ x: 5, color: "#ffffff" }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   About
-                </a>
+                </motion.a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <motion.a
+                  href="#"
+                  className="hover:text-white transition-colors"
+                  whileHover={{ x: 5, color: "#ffffff" }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   Careers
-                </a>
+                </motion.a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <motion.a
+                  href="#"
+                  className="hover:text-white transition-colors"
+                  whileHover={{ x: 5, color: "#ffffff" }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   Contact
-                </a>
+                </motion.a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <motion.a
+                  href="#"
+                  className="hover:text-white transition-colors"
+                  whileHover={{ x: 5, color: "#ffffff" }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   Press
-                </a>
+                </motion.a>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
-          <div>
-            <h4 className="font-semibold mb-4">Others</h4>
+          <motion.div variants={itemVariants}>
+            <motion.h4
+              className="font-semibold mb-4"
+              whileHover={{ color: "#8b5cf6" }}
+            >
+              Others
+            </motion.h4>
             <ul className="space-y-2 text-gray-400">
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <motion.a
+                  href="#"
+                  className="hover:text-white transition-colors"
+                  whileHover={{ x: 5, color: "#ffffff" }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   Privacy
-                </a>
+                </motion.a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <motion.a
+                  href="#"
+                  className="hover:text-white transition-colors"
+                  whileHover={{ x: 5, color: "#ffffff" }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   Terms
-                </a>
+                </motion.a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <motion.a
+                  href="#"
+                  className="hover:text-white transition-colors"
+                  whileHover={{ x: 5, color: "#ffffff" }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   Security
-                </a>
+                </motion.a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <motion.a
+                  href="#"
+                  className="hover:text-white transition-colors"
+                  whileHover={{ x: 5, color: "#ffffff" }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   Status
-                </a>
+                </motion.a>
               </li>
             </ul>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        <div className="border-t border-gray-800 pt-8 flex flex-col sm:flex-row items-center justify-between">
-          <p className="text-gray-400 text-sm mb-4 sm:mb-0">
+        <motion.div
+          className="border-t border-gray-800 pt-8 flex flex-col sm:flex-row items-center justify-between"
+          variants={itemVariants}
+        >
+          <motion.p
+            className="text-gray-400 text-sm mb-4 sm:mb-0"
+            whileHover={{ color: "#ffffff" }}
+          >
             Copyright © 2024. All rights reserved.
-          </p>
-          <div className="flex items-center space-x-6">
-            <span className="text-gray-400 text-sm">Status</span>
-            <span className="text-gray-400 text-sm">Accessibility</span>
-          </div>
-        </div>
+          </motion.p>
+          <motion.div
+            className="flex items-center space-x-6"
+            variants={containerVariants}
+          >
+            <motion.span
+              className="text-gray-400 text-sm"
+              whileHover={{ color: "#ffffff", scale: 1.05 }}
+            >
+              Status
+            </motion.span>
+            <motion.span
+              className="text-gray-400 text-sm"
+              whileHover={{ color: "#ffffff", scale: 1.05 }}
+            >
+              Accessibility
+            </motion.span>
+          </motion.div>
+        </motion.div>
       </div>
-    </footer>
+    </motion.footer>
   );
 };
 
