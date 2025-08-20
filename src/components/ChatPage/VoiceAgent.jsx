@@ -10,7 +10,7 @@ const VoiceAgent = React.forwardRef(
     sessionId,
     setShowTyping,
     dataChannelRef,
-    pendingInstructionsRef, // ✅ new
+    pendingInstructionsRef, 
   }) => {
     const peerConnectionRef = useRef(null);
     const streamRef = useRef(null);
@@ -122,7 +122,7 @@ const VoiceAgent = React.forwardRef(
             })
           );
 
-          // ✅ Flush any pending instructions
+          // Flush any pending instructions
           if (pendingInstructionsRef.current.length > 0) {
             pendingInstructionsRef.current.forEach((instr) => dc.send(instr));
             pendingInstructionsRef.current = [];

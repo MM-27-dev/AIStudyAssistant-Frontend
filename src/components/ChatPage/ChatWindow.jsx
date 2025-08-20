@@ -11,15 +11,6 @@ export default function ChatWindow({ messages, showTyping }) {
     }
   }, [messages]);
 
-  // useEffect(() => {
-  //   const last = messages[messages.length - 1];
-  //   if (last?.type === "user") {
-  //     setShowTyping(true);
-  //   } else if (last?.type === "bot") {
-  //     setShowTyping(false);
-  //   }
-  // }, [messages]);
-
   const formatTime = (timestamp) => {
     return (
       timestamp ||

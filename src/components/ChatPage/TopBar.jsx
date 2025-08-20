@@ -14,7 +14,7 @@ export default function TopBar() {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [userInitial, setUserInitial] = useState("");
   const navigate = useNavigate();
-  const profileMenuRef = useRef(null); // 👈 Ref for dropdown
+  const profileMenuRef = useRef(null);
 
   // Fetch logged-in user info
   useEffect(() => {

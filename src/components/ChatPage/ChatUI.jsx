@@ -6,7 +6,7 @@ import SuggestionCard from "./SuggestionCard";
 import ChatInput from "./ChatInput";
 
 function ChatUI() {
-  const [sidebarCollapsed, setSidebarCollapsed] = React.useState(true); // Default to collapsed as per image_dbbe79.png
+  const [sidebarCollapsed, setSidebarCollapsed] = React.useState(true); 
 
   const suggestions = [
     {

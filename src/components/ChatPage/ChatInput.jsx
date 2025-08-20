@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Paperclip, Send } from "lucide-react";
 import { AuthService } from "../../Services/authServices";
 import VoiceAgent from "./VoiceAgent";
-import { pdfToText } from "../../utils/fileExtracter";
+import { extractTextFromFile } from "../../utils/fileExtracter";
 
 export default function ChatInput({
   onSendMessage,
@@ -22,12 +22,12 @@ export default function ChatInput({
 
     console.log(mode, "===========>");
 
-    // ✅ Voice mode handling
     if (mode === "voice") {
-      // If file exists in voice mode → handle file upload
       if (file) {
         try {
-          const extractedText = await pdfToText(file);
+          const extractedText = await extractTextFromFile(file);
+          console.log("Extracted text:", extractedText);
+
           const truncatedText = extractedText.slice(0, 4000);
 
           const timestamp = new Date().toLocaleTimeString([], {
@@ -49,7 +49,6 @@ export default function ChatInput({
 
           onSendMessage(newMessage);
 
-          // Build instruction packet for the realtime API
           const instruction = JSON.stringify({
             type: "session.update",
             session: {
@@ -57,33 +56,33 @@ export default function ChatInput({
             },
           });
 
-          // Send immediately if dataChannel open, else queue it
           if (
             dataChannelRef.current &&
             dataChannelRef.current.readyState === "open"
           ) {
+            console.log("Sending instruction:", instruction);
             dataChannelRef.current.send(instruction);
           } else {
             pendingInstructionsRef.current.push(instruction);
           }
 
           // Save in DB
-          try {
-            setShowTyping(true);
-            await AuthService.saveMessageToSession(sessionId, {
-              content: truncatedText,
-              isUser: true,
-              messageType: "voice-file",
-              file: {
-                originalName: file.name,
-                filename: file.name,
-              },
-            });
-          } catch (err) {
-            console.error("Error saving voice file message:", err);
-          } finally {
-            setShowTyping(false);
-          }
+          // try {
+          //   setShowTyping(true);
+          //   await AuthService.saveMessageToSession(sessionId, {
+          //     content: truncatedText,
+          //     isUser: true,
+          //     messageType: "voice-file",
+          //     file: {
+          //       originalName: file.name,
+          //       filename: file.name,
+          //     },
+          //   });
+          // } catch (err) {
+          //   console.error("Error saving voice file message:", err);
+          // } finally {
+          //   setShowTyping(false);
+          // }
 
           setFile(null);
           setMessage("");
@@ -93,7 +92,6 @@ export default function ChatInput({
         }
       }
 
-      // Else → handle normal voice text message
       if (!message.trim()) return;
 
       const timestamp = new Date().toLocaleTimeString([], {
@@ -147,7 +145,6 @@ export default function ChatInput({
       return;
     }
 
-    // ✅ Text / File handling (unchanged)
     setShowTyping(true);
 
     if (!message.trim() && !file) {
@@ -293,11 +290,11 @@ export default function ChatInput({
               <VoiceAgent
                 setMode={setMode}
                 setMessages={setMessages}
-                prompt="You're a helpful assistant"
+                prompt="You're a helpful assistant, Help user to summarize the content of the uploaded file. So when user says 'summarize', you should provide a summary of the file content."
                 sessionId={sessionId}
                 setShowTyping={setShowTyping}
                 dataChannelRef={dataChannelRef}
-                pendingInstructionsRef={pendingInstructionsRef} // ✅ pass down
+                pendingInstructionsRef={pendingInstructionsRef} 
               />
             </div>
 

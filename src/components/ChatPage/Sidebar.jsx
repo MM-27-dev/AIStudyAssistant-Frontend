@@ -21,7 +21,6 @@ export default function Sidebar() {
   const [settingsOpen, setSettingsOpen] = React.useState(false);
   const navigate = useNavigate();
 
-  // Toggle sidebar width
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };
@@ -38,7 +37,6 @@ export default function Sidebar() {
         const messages = messagesRes.data;
 
         if (messages.length === 0) {
-          // Reuse current session if no messages exist
           navigate(`/chatdashboard?newChat=true&sessionId=${currentSessionId}`);
           return;
         }
@@ -47,8 +45,8 @@ export default function Sidebar() {
         await AuthService.endSessionAndGenerateTitle(currentSessionId);
         sessionStorage.removeItem("chatSessionId");
       } catch (err) {
-        console.warn("⚠️ Session check failed:", err);
-        sessionStorage.removeItem("chatSessionId"); // fallback clear
+        console.warn("Session check failed:", err);
+        sessionStorage.removeItem("chatSessionId");
       }
     }
 
@@ -60,7 +58,6 @@ export default function Sidebar() {
       const newSessionId = newSession.data._id;
       sessionStorage.setItem("chatSessionId", newSessionId);
 
-      // navigate(`/chatdashboard?newChat=true&sessionId=${newSessionId}`);
       navigate(`/chatdashboard?newChat=true&sessionId=${newSessionId}`, {
         replace: true,
       });

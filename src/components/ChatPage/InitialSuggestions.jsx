@@ -1,4 +1,3 @@
-// InitialSuggestions.jsx
 import React from "react";
 import { X, Target, Network, Clover } from "lucide-react";
 

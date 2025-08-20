@@ -1,10 +1,10 @@
 import React from "react";
 
 const iconColors = {
-  "Create a crossword puzzle for me": "bg-[#3B3BFF] text-white", // Blue
-  "Plan a budget for my vacation": "bg-[#FF6B6B] text-white", // Red-ish
-  "Ethical implications of AI": "bg-[#6BD27F] text-white", // Green
-  "Calendar for the whole month": "bg-[#FFD43B] text-black", // Yellow
+  "Create a crossword puzzle for me": "bg-[#3B3BFF] text-white", 
+  "Plan a budget for my vacation": "bg-[#FF6B6B] text-white", 
+  "Ethical implications of AI": "bg-[#6BD27F] text-white", 
+  "Calendar for the whole month": "bg-[#FFD43B] text-black", 
 };
 
 export default function SuggestionCard({ icon: Icon, title, onClick }) {
