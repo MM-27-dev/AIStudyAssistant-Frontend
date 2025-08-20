@@ -1,5 +1,4 @@
 // App.jsx
-import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import DashboardLayout from "./Pages/DashboardLayout";
 import ProtectedRoute from "./HOC/ProtectedRoute";
@@ -9,7 +8,6 @@ import Register from "./Pages/Auth/Register";
 import ChatPage from "./Pages/ChatPage";
 import ProfileUpdatePage from "./Pages/ProfileUpdatePage";
 // import PricingPage from "./components/PricingPage/PricingPage"; // upcoming
-
 
 //  app componenet
 function App() {

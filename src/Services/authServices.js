@@ -4,6 +4,7 @@ import config from "../config/config";
 const BACKEND_URL = config.BACKEND_URL;
 
 export class AuthService {
+  // User authentication endpoints
   static USER_REGISTER = `${BACKEND_URL}/users/register`;
   static USER_LOGIN = `${BACKEND_URL}/users/login`;
   static USER_LOGOUT = `${BACKEND_URL}/users/logout`;
@@ -11,8 +12,11 @@ export class AuthService {
   static USER_FORGOT_PASSWORD = `${BACKEND_URL}/users/forgot-password`;
   static USER_CURRENT = `${BACKEND_URL}/users/current-user`;
   static USER_REFRESH_TOKEN = `${BACKEND_URL}/users/refresh-token`;
+
+  // Chat session endpoints
   static CREATE_SESSION = `${BACKEND_URL}/chat/session`;
   static SEND_MESSAGE = `${BACKEND_URL}/chat/session`;
+  static SAVE_MESSAGE = `${BACKEND_URL}/chat/session`;
   static END_SESSION = `${BACKEND_URL}/chat/session`;
   static GET_MESSAGE = `${BACKEND_URL}/chat/session`;
   static SEND_FILE = `${BACKEND_URL}/chat/session`;
@@ -109,6 +113,19 @@ export class AuthService {
     );
   }
 
+  static saveMessageToSession(sessionId, payload) {
+    return axios.post(
+      `${AuthService.SAVE_MESSAGE}/message/save/${sessionId}`,
+      payload,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      }
+    );
+  }
+
   static endSessionAndGenerateTitle(sessionId) {
     return axios.post(
       `${AuthService.END_SESSION}/${sessionId}/end`,
@@ -138,5 +155,3 @@ export class AuthService {
     );
   }
 }
-
-
