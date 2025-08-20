@@ -22,6 +22,12 @@ export class AuthService {
   static SEND_FILE = `${BACKEND_URL}/chat/session`;
   static OPENAI_VOICE_TOKEN = `${BACKEND_URL}/chat/openai/token`;
 
+  static getSessions(limit = 10) {
+    return axios.get(`${BACKEND_URL}/chat/sessions?limit=${limit}`, {
+      withCredentials: true,
+    });
+  }
+
   static getVoiceToken(voice = "alloy") {
     return axios.post(
       AuthService.OPENAI_VOICE_TOKEN,

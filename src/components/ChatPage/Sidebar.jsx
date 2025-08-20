@@ -1,5 +1,5 @@
 // Sidebar.jsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   MessageSquare,
   History,
@@ -19,13 +19,30 @@ export default function Sidebar() {
   const [isCollapsed, setIsCollapsed] = React.useState(false);
   const [chatHistoryOpen, setChatHistoryOpen] = React.useState(false);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
+  const [sessions, setSessions] = useState([]);
   const navigate = useNavigate();
 
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };
 
-  // Handle "New Chat" button click
+  const fetchSessions = async () => {
+    try {
+      const res = await AuthService.getSessions(10);
+      const latestSessions = (res.data || [])
+        .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+        .slice(0, 10);
+
+      setSessions(latestSessions);
+    } catch (err) {
+      console.error("Failed to load sessions:", err);
+    }
+  };
+
+   useEffect(() => {
+     fetchSessions();
+   }, []);
+
   const handleNewChat = async () => {
     const currentSessionId = sessionStorage.getItem("chatSessionId");
 
@@ -58,12 +75,20 @@ export default function Sidebar() {
       const newSessionId = newSession.data._id;
       sessionStorage.setItem("chatSessionId", newSessionId);
 
+      await fetchSessions();
+
       navigate(`/chatdashboard?newChat=true&sessionId=${newSessionId}`, {
         replace: true,
       });
     } catch (err) {
-      console.error("❌ Failed to create new session:", err);
+      console.error("Failed to create new session:", err);
     }
+  };
+
+  // Open a session from history
+  const handleOpenSession = (sessionId) => {
+    sessionStorage.setItem("chatSessionId", sessionId);
+    navigate(`/chatdashboard?sessionId=${sessionId}`);
   };
 
   return (
@@ -89,7 +114,6 @@ export default function Sidebar() {
         )}
       </div>
 
-      {/* Expand button (when collapsed) */}
       {isCollapsed && (
         <button
           onClick={toggleCollapse}
@@ -145,6 +169,25 @@ export default function Sidebar() {
               />
             )}
           </button>
+
+          {/* Sessions List */}
+          {chatHistoryOpen && !isCollapsed && (
+            <div className="ml-6 mt-2 space-y-2">
+              {sessions.length === 0 ? (
+                <p className="text-xs text-gray-500">No chats yet</p>
+              ) : (
+                sessions.map((session) => (
+                  <button
+                    key={session._id}
+                    onClick={() => handleOpenSession(session._id)}
+                    className="block w-full text-left text-[#CCCCCC] hover:bg-gray-700 rounded-md px-2 py-1 text-sm truncate"
+                  >
+                    {session.title || "Untitled Session"}
+                  </button>
+                ))
+              )}
+            </div>
+          )}
         </div>
 
         {/* AI Personalities */}
